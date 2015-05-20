@@ -1,25 +1,25 @@
 nginx:
     build: ./nginx
     links:
-        - node1:node1
-        - node2:node2
-        - node3:node3
+        - nodeGet1:node1
+        - nodeGet2:node2
+        - nodePost1:node3
     ports:
         - "80:80"
-node1:
-    build: ./node
+nodeGet1:
+    build: ./get_node
     links:
         - redis
     ports:
         - "8080"
-node2:
-    build: ./node
+nodeGet2:
+    build: ./get_node
     links:
         - redis
     ports:
         - "8080"
-node3:
-    build: ./node
+nodePost1:
+    build: ./post_node
     links:
         - redis
     ports:
