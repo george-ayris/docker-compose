@@ -12,6 +12,8 @@ consul:
 registrator:
     image: gliderlabs/registrator
     command: consul://192.168.99.101:8500
+    volumes:
+        - /var/run/docker.sock:/tmp/docker.sock
 nginx:
     build: ./nginx
     links:
