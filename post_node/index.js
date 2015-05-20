@@ -18,7 +18,7 @@ var client = redis.createClient('6379', 'redis');
 app.post('/', function(req, res, next) {
   client.incr('counter', function(err, counter) {
     if(err) return next(err);
-    res.send('Incremented counter to ' + counter '\n.');
+    res.send('Incremented counter to ' + counter + '\n.');
   });
 });
 
