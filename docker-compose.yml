@@ -1,9 +1,9 @@
 nginx:
     build: ./nginx
     links:
-        - nodeGet1:node1
-        - nodeGet2:node2
-        - nodePost1:node3
+        - node_get1:node1
+        - node_get2:node2
+        - node_post1:node3
     ports:
         - "80:80"
 nodeGet1:
