@@ -10,7 +10,7 @@ consul:
         -ui-dir /ui 
 registrator:
     image: gliderlabs/registrator
-    command: consul://$(docker inspect -f '{{.NetworkSettings.IPAddress}}' node1):8500
+    command: consul://${docker inspect -f '{{.NetworkSettings.IPAddress}}' node1}:8500
     hostname: $HOSTNAME
     volumes:
         - /var/run/docker.sock:/tmp/docker.sock
