@@ -6,19 +6,19 @@ nginx:
         - postnode1
     ports:
         - "80:80"
-nodeget1:
+getnode1:
     build: ./get_node
     links:
         - redis
     ports:
         - "8080"
-nodeget2:
+getnode2:
     build: ./get_node
     links:
         - redis
     ports:
         - "8080"
-nodepost1:
+postnode1:
     build: ./post_node
     links:
         - redis
