@@ -1,5 +1,6 @@
 consul:
     image: progrium/consul
+    name: consul
     ports:
         - "8400:8400"
         - "8500:8500"
@@ -8,34 +9,40 @@ consul:
         -server 
         -bootstrap 
         -ui-dir /ui
-        -advertise 10.50.1.16
+        -advertise 10.50.1.114
 registrator:
     image: gliderlabs/registrator
-    command: consul://10.50.1.16:8500
+    name: registrator
+    command: consul://10.50.1.114:8500
     hostname: $HOSTNAME
     volumes:
         - /var/run/docker.sock:/tmp/docker.sock
 nginx:
     build: ./nginx
+    name: nginx
     dns: 172.17.42.1
     ports:
         - "80:80"
 getnode1:
     build: ./get_node
+    name: getnode1
     dns: 172.17.42.1
     ports:
         - "8080"
 getnode2:
     build: ./get_node
+    name: getnode2
     dns: 172.17.42.1
     ports:
         - "8080"
 postnode1:
     build: ./post_node
+    name: postnode1
     dns: 172.17.42.1
     ports:
         - "8080"
 redis:
     image: redis
+    name: redis
     ports:
         - "6379"
