@@ -17,28 +17,22 @@ registrator:
         - /var/run/docker.sock:/tmp/docker.sock
 nginx:
     build: ./nginx
-    links:
-        - getnode1
-        - getnode2
-        - postnode1
+    dns: 172.17.42.1
     ports:
         - "80:80"
 getnode1:
     build: ./get_node
-    links:
-        - redis
+    dns: 172.17.42.1
     ports:
         - "8080"
 getnode2:
     build: ./get_node
-    links:
-        - redis
+    dns: 172.17.42.1
     ports:
         - "8080"
 postnode1:
     build: ./post_node
-    links:
-        - redis
+    dns: 172.17.42.1
     ports:
         - "8080"
 redis:
