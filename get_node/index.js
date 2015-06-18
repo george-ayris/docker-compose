@@ -13,7 +13,7 @@ console.log(process.env.REDIS_PORT_6379_TCP_ADDR + ':' + process.env.REDIS_PORT_
 // );
 
 // APPROACH 2: Using host entries created by Docker in /etc/hosts (RECOMMENDED)
-var client = redis.createClient('6379', 'redis');
+var client = redis.createClient(6379, '10.50.1.114');//'redis.service.consul');
 
 
 app.get('/', function(req, res, next) {

@@ -1,0 +1,19 @@
+#!/bin/bash
+# Get IP address of host
+ipAddr=$(ip route get 8.8.8.8 | awk 'NR==1 {print $NF}')
+
+docker stop consul registrator redis getnode
+docker rm consul registrator redis getnode
+
+# Consul
+docker run -p 8400:8400 -p 8500:8500 -p $ipAddr:53:53/udp -h node1 -d --name consul progrium/consul -server -bootstrap -ui-dir /ui -advertise $ipAddr
+
+# Registrator
+docker run -h $HOSTNAME -v /var/run/docker.sock:/tmp/docker.sock -d --name registrator gliderlabs/registrator consul://$ipAddr:8500
+
+# Redis
+docker run -d -p 6379:6379 --name redis redis
+
+# Get Node
+docker build -t getnode ./get_node
+docker run -d --name getnode -p 8080 --dns $ipAddr getnode
