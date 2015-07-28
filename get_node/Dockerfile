@@ -7,9 +7,6 @@ RUN apt-get update && \
     curl -sL https://deb.nodesource.com/setup | sudo bash - && \
     apt-get -y install python build-essential nodejs
 
-# Install nodemon
-RUN npm install -g nodemon
-
 # Provides cached layer for node_modules
 ADD package.json /tmp/package.json
 RUN cd /tmp && npm install
@@ -23,4 +20,4 @@ ADD . /src
 EXPOSE  8080
 
 # Run app using nodemon
-CMD ["nodemon", "/src/index.js"]
+CMD ["node", "/src/index.js"]
