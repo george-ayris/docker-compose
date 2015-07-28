@@ -24,4 +24,5 @@ docker build -t postnode ./post_node
 docker run -d --name postnode1 -p 8083:8080 --dns=$ipAddr --dns-search=service.consul postnode
 
 # Nginx
+docker build -t nginx ./nginx
 docker run -d -p 80:80 --name nginx --dns=$ipAddr --dns-search=service.consul nginx
