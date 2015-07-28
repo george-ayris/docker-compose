@@ -1,8 +1,24 @@
 # Set nginx base image
-FROM nginx
+FROM nginx:1.7
 
-# File Author / Maintainer
-MAINTAINER Anand Mani Sankar
+# Install Curl
+RUN apt-get update -qq && apt-get -y install curl
 
-# Copy custom configuration file from the current directory
-COPY nginx.conf /etc/nginx/nginx.conf
+# Download and Install Consul Template
+ENV CT_URL https://github.com/hashicorp/consul-template/releases/download/v0.10.0/consul-template_0.10.0_linux_amd64.tar.gz
+RUN curl -L $CT_URL | \
+tar -C /usr/local/bin --strip-components 1 -zxf -
+
+# Setup Consul Template Files
+RUN mkdir /etc/consul-templates
+COPY nginx.conf /etc/consul-templates/nginx.conf
+ENV CT_FILE /etc/consul-templates/nginx.conf
+
+# Setup Nginx File
+ENV NX_FILE /etc/nginx/conf.d/app.conf
+
+# Start nginx and consul-template
+CMD /usr/sbin/nginx -c /etc/nginx/nginx.conf \
+& CONSUL_TEMPLATE_LOG=debug consul-template \
+  -consul=consul:8500 \
+  -template "$CT_FILE:$NX_FILE:/usr/sbin/nginx -s reload";
