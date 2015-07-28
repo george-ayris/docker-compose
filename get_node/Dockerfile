@@ -1,5 +1,5 @@
 # Set the base image to Ubuntu
-FROM    ubuntu
+FROM ubuntu
 
 # Install Node.js and other dependencies
 RUN apt-get update && \
@@ -23,4 +23,4 @@ ADD . /src
 EXPOSE  8080
 
 # Run app using nodemon
-CMD ["nodemon", "/src/index.js"]
+CMD ["nodemon", "/src/index.js $INCREMENT"]

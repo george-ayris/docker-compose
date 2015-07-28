@@ -22,5 +22,8 @@ ADD . /src
 # Expose port
 EXPOSE  8080
 
+# Environment variable that can be configured per container
+ENV INCREMENT 1
+
 # Run app using nodemon
 CMD ["nodemon", "/src/index.js"]
