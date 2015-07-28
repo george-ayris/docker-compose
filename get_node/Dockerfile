@@ -23,4 +23,4 @@ ADD . /src
 EXPOSE  8080
 
 # Run app using nodemon
-CMD ["nodemon", "/src/index.js $INCREMENT"]
+CMD ["nodemon", "/src/index.js"]
