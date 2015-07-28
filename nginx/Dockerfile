@@ -1,5 +1,5 @@
 # Set nginx base image
-FROM nginx
+FROM nginx:1.7
 
 # Install Curl
 RUN apt-get update -qq && apt-get -y install curl
