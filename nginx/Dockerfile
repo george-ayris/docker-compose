@@ -14,7 +14,7 @@ COPY nginx.conf /etc/consul-templates/nginx.conf
 ENV CT_FILE /etc/consul-templates/nginx.conf
 
 # Setup Nginx File
-ENV NX_FILE /etc/nginx/app.conf
+ENV NX_FILE /etc/nginx/nginx.conf
 
 # Start nginx and consul-template
 CMD /usr/sbin/nginx -c /etc/nginx/nginx.conf \
