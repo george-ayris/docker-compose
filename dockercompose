@@ -17,3 +17,7 @@ docker run -d -p 6379:6379 --name redis redis
 # Get Node
 docker build -t getnode ./get_node
 docker run -d --name getnode -p 8080 --dns=$ipAddr --dns-search=service.consul getnode
+
+# Post node 
+docker build -t postnode ./post_node
+docker run -d --name postnode -p 8080 --dns=$ipAddr --dns-search=service.consul postnode
