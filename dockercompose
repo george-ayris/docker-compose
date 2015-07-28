@@ -2,8 +2,8 @@
 # Get IP address of host
 ipAddr=$(ip route get 8.8.8.8 | awk 'NR==1 {print $NF}')
 
-docker stop consul registrator redis getnode1 getnode2 postnode1 nginx
-docker rm consul registrator redis getnode1 getnode2 postnode1 nginx
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
 
 # Consul
 docker run -p 8400:8400 -p 8500:8500 -p $ipAddr:53:53/udp -h node1 -d --name consul progrium/consul -server -bootstrap -ui-dir /ui -advertise $ipAddr
@@ -16,12 +16,12 @@ docker run -d -p 6379:6379 --name redis redis
 
 # Get Nodes
 docker build -t getnode ./get_node
-docker run -d --name getnode1 -p 8081:8080 --dns=$ipAddr --dns-search=service.consul getnode -e "SERVICE_TAGS=api"
-docker run -d --name getnode2 -p 8082:8080 --dns=$ipAddr --dns-search=service.consul getnode -e "SERVICE_TAGS=api"
+docker run -d --name getnode1 -p 8081:8080 --dns=$ipAddr --dns-search=service.consul -e "SERVICE_TAGS=api" getnode -e 
+docker run -d --name getnode2 -p 8082:8080 --dns=$ipAddr --dns-search=service.consul -e "SERVICE_TAGS=api" getnode -e 
 
 # Post node 
 docker build -t postnode ./post_node
-docker run -d --name postnode1 -p 8083:8080 --dns=$ipAddr --dns-search=service.consul postnode -e "SERVICE_TAGS=api"
+docker run -d --name postnode1 -p 8083:8080 --dns=$ipAddr --dns-search=service.consul -e "SERVICE_TAGS=api" postnode 
 
 # Nginx
 docker build -t nginx ./nginx
