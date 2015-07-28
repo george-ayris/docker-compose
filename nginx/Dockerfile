@@ -1,5 +1,5 @@
 # Set nginx base image
-FROM nginx:1.7
+FROM nginx
 
 # Install Curl
 RUN apt-get update -qq && apt-get -y install curl
@@ -15,7 +15,7 @@ COPY nginx.conf /etc/consul-templates/nginx.conf
 ENV CT_FILE /etc/consul-templates/nginx.conf
 
 # Setup Nginx File
-ENV NX_FILE /etc/nginx/conf.d/app.conf
+ENV NX_FILE /etc/nginx/app.conf
 
 # Start nginx and consul-template
 CMD /usr/sbin/nginx -c /etc/nginx/nginx.conf \
