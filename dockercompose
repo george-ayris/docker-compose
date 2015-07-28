@@ -2,8 +2,8 @@
 # Get IP address of host
 ipAddr=$(ip route get 8.8.8.8 | awk 'NR==1 {print $NF}')
 
-docker stop consul registrator redis getnode
-docker rm consul registrator redis getnode
+docker stop consul registrator redis getnode postnode
+docker rm consul registrator redis getnode postnode
 
 # Consul
 docker run -p 8400:8400 -p 8500:8500 -p $ipAddr:53:53/udp -h node1 -d --name consul progrium/consul -server -bootstrap -ui-dir /ui -advertise $ipAddr
