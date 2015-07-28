@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ "$#" -ne 3 ]; then
+	echo "Must supply container name, port number and increment amount."
+	exit 0
+fi
+
+ipAddr=$(ip route get 8.8.8.8 | awk 'NR==1 {print $NF}')
+
+docker run -d --name $1 -p $2:8080 --dns=$ipAddr --dns-search=service.consul -e "INCREMENT=$3" postnode
