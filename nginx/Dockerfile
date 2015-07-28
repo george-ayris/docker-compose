@@ -10,7 +10,6 @@ RUN curl -L $CT_URL | \
 tar -C /usr/local/bin --strip-components 1 -zxf -
 
 # Setup Consul Template Files
-RUN mkdir /etc/consul-templates
 COPY nginx.conf /etc/consul-templates/nginx.conf
 ENV CT_FILE /etc/consul-templates/nginx.conf
 
