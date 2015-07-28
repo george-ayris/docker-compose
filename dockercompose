@@ -16,8 +16,8 @@ docker run -d -p 6379:6379 --name redis redis
 
 # Get Nodes
 docker build -t getnode ./get_node
-docker run -d --name getnode1 -p 8081:8080 --dns=$ipAddr --dns-search=service.consul -e "SERVICE_TAGS=api" getnode -e 
-docker run -d --name getnode2 -p 8082:8080 --dns=$ipAddr --dns-search=service.consul -e "SERVICE_TAGS=api" getnode -e 
+docker run -d --name getnode1 -p 8081:8080 --dns=$ipAddr --dns-search=service.consul -e "SERVICE_TAGS=api" getnode 
+docker run -d --name getnode2 -p 8082:8080 --dns=$ipAddr --dns-search=service.consul -e "SERVICE_TAGS=api" getnode 
 
 # Post node 
 docker build -t postnode ./post_node
