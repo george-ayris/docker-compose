@@ -8,14 +8,14 @@ console.log(process.env.INCREMENT);
 
 var client = redis.createClient('6379', 'redis');
 
-app.post('/', function(req, res, next) {
+app.post('/postnode', function(req, res, next) {
   client.incrby('counter', process.env.INCREMENT, function(err, counter) {
     if(err) return next(err);
     res.send('Incremented counter to ' + counter + '\n.');
   });
 });
 
-app.get('/', function(req, res, next) {
+app.get('/postnode', function(req, res, next) {
     res.send('No get function here!\n');
 });
 
